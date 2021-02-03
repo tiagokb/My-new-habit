@@ -1,7 +1,10 @@
 <resources>
+    <string name="main_welcome_person_name">Olá %1$s!</string>
     <string name="app_name">My new habit</string>
     <string name="welcome_message"><b>Bem-vindo</b>\nParabéns por tomar a iniciativa de mudar um estilo de vida e tentar evoluir, lembre-se de começar com metas curtas e tangíveis\nVamos nos conhecer um pouco</string>
     <string name="hint_person_name">Como vamos te chamar?</string>
     <string name="btn_enter">vamos lá</string>
     <string name="save_person_name_data_error">Erro desconhecido, tente novamente ou entre em contato</string>
+    <string name="habits">habits</string>
+    <string name="statistic">estatisticas</string>
 </resources>

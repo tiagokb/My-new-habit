@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.tiagokontarski.mynewhabit.data.DataSource;
 
 public class WelcomeViewModel extends AndroidViewModel {
+
     public WelcomeViewModel(@NonNull Application application) {
         super(application);
     }
