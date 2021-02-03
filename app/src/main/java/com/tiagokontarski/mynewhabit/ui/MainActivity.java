@@ -14,9 +14,6 @@ import butterknife.BindView;
 
 public class MainActivity extends AbstractActivity {
 
-    @BindView(R.id.test_welcome_text)
-    TextView test;
-
     public static void launch(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -25,9 +22,6 @@ public class MainActivity extends AbstractActivity {
 
     @Override
     public void onInject() {
-        DataSource dataSource = new LocalDataSource(this);
-        String name = dataSource.getPersonName();
-        test.setText(name);
     }
 
     @Override
