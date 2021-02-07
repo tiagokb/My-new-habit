@@ -8,9 +8,9 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.tiagokontarski.mynewhabit.R;
-import com.tiagokontarski.mynewhabit.commoms.activitys.AbstractActivity;
-import com.tiagokontarski.mynewhabit.data.DataSource;
-import com.tiagokontarski.mynewhabit.data.LocalDataSource;
+import com.tiagokontarski.mynewhabit.commoms.views.AbstractActivity;
+import com.tiagokontarski.mynewhabit.data.PersonDataSource;
+import com.tiagokontarski.mynewhabit.data.PersonPersonDataBase;
 import com.tiagokontarski.mynewhabit.viewmodel.WelcomeViewModel;
 import com.tiagokontarski.mynewhabit.viewmodel.factory.WelcomeViewModelFactory;
 
@@ -30,12 +30,12 @@ public class WelcomeActivity extends AbstractActivity {
     Button btnEnter;
 
     private WelcomeViewModel viewModel;
-    private final DataSource dataSource = new LocalDataSource(this);
+    private final PersonDataSource personDataSource = new PersonPersonDataBase(this);
 
     @Override
     public void onInject() {
         viewModel = new ViewModelProvider(this, new WelcomeViewModelFactory(getApplication())).get(WelcomeViewModel.class);
-        viewModel.setDataSource(dataSource);
+        viewModel.setPersonDataSource(personDataSource);
 
         observe();
 

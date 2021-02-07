@@ -7,7 +7,7 @@
         android:title="@string/habits" />
 
     <item
-        android:id="@+id/item_main_nav_statistic"
+        android:id="@+id/item_main_nav_hints"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_query_stats_24"
         android:title="@string/statistic" />

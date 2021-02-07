@@ -7,4 +7,26 @@
     <string name="save_person_name_data_error">Erro desconhecido, tente novamente ou entre em contato</string>
     <string name="habits">habits</string>
     <string name="statistic">estatisticas</string>
+    <string name="description">descrição</string>
+    <string name="extra_low">15 min</string>
+    <string name="low">30 min</string>
+    <string name="regular">45 min</string>
+    <string name="high">60 min</string>
+    <string name="new_habit_duration">Escolha uma duração para o seu novo habito</string>
+    <string name="save">salvar</string>
+    <string name="habit_et_description">Descreva seu novo habito</string>
+    <string name="unchecked_cast">Erro ao iniciar tela, tente novamente ou entre em contato com o desenvolvedor</string>
+    <string name="loading_item_error">Erro ao carregar habito</string>
+    <string name="hints_1">Entender onde estamos, quem somos e o que somos de capazes de fazer e transformar, é o primeiro passo para promover uma mudança de hábito. Outro ponto importante é saber porque essa mudança é importante para você. Isso se, de fato, ela for importante.</string>
+    <string name="hints_2">Ter um motivo verdadeiro, que faça sentido real em sua vida o ajudará a ter mais determinação para modificar seus hábitos e não desistir no primeiro desafio.</string>
+    <string name="hints_3">Pense nessas tarefas como mini hábitos que apontam para o seu objetivo maior. A ideia é iniciar com pequenas ações para sair da inércia, sem provocar nenhum desconforto.</string>
+    <string name="hints_4">Pode não parecer muita coisa, mas é assim que os hábitos são criados: um pequeno passo, quase que imperceptível, por vez. Assim, quanto menor o esforço, menor serão suas objeções.</string>
+    <string name="hints_5">Por isso, ao determinar uma tarefa é muito importante que você estabeleça também uma frequência para ela. Pode ser todos os dias, 3 vezes na semana ou qualquer outra quantidade que desejar, desde que seja frequente.</string>
+    <string name="hints_6">Estabeleça um prazo justo para esse objetivo, lembrando que cada hábito tem um tempo para ser enraizado, pense em metas reais, alcançáveis. Divida esse mapa em mini hábitos a partir de hoje e cria uma lista de tarefas para alcançar cada um dos pequenos objetivos.</string>
+    <string name="hints_7">Alguns hábitos, como vícios, envolvem outros fatores químicos e cognitivos que precisam ser trabalhados e orientados por profissionais da saúde, para evitar problemas de abstinência.</string>
+    <string name="hints_title">Aqui vai algumas dicas pra você</string>
+    <string name="delete_item">Excluir item</string>
+    <string name="delete_message">O item será excluido permanentemente, deseja continuar?</string>
+    <string name="delete_item_button">Deletar item</string>
+    <string name="cancel_delete_item">cancelar</string>
 </resources>

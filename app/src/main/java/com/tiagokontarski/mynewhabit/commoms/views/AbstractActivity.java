@@ -1,4 +1,4 @@
-package com.tiagokontarski.mynewhabit.commoms.activitys;
+package com.tiagokontarski.mynewhabit.commoms.views;
 
 import android.os.Bundle;
 

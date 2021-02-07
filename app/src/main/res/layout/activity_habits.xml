@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".ui.HabitsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/habit_til_description"
+                style="@style/HabitEditText.Input"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <EditText
+                    android:id="@+id/habit_et_description"
+                    style="@style/HabitEditText"
+                    android:ellipsize="end"
+                    android:hint="@string/description"
+                    android:inputType="textShortMessage"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/habit_textview"
+                style="@style/HabitTextView"
+                android:layout_width="match_parent"
+                android:layout_marginTop="24dp"
+                android:text="@string/new_habit_duration"
+                android:textAlignment="center"
+                android:textColor="@color/black" />
+
+            <RadioGroup
+                android:id="@+id/habit_rg_duration"
+                style="@style/HabitRadioGroup"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/habit_textview">
+
+                <RadioButton
+                    android:id="@+id/habit_rb_extra_low"
+                    style="@style/HabitRadioGroup.Button"
+                    android:text="@string/extra_low" />
+
+                <RadioButton
+                    android:id="@+id/habit_rb_low"
+                    style="@style/HabitRadioGroup.Button"
+                    android:text="@string/low" />
+
+                <RadioButton
+                    android:id="@+id/habit_rb_regular"
+                    style="@style/HabitRadioGroup.Button"
+                    android:text="@string/regular" />
+
+                <RadioButton
+                    android:id="@+id/habit_rb_high"
+                    style="@style/HabitRadioGroup.Button"
+                    android:text="@string/high" />
+
+            </RadioGroup>
+
+            <TimePicker
+                android:id="@+id/habit_tp_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/habit_rg_duration" />
+
+            <Button
+                android:id="@+id/habit_btn_save"
+                style="@style/HabitButton"
+                android:layout_marginBottom="24dp"
+                android:text="@string/save" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

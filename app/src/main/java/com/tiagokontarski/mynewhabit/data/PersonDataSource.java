@@ -1,6 +1,6 @@
 package com.tiagokontarski.mynewhabit.data;
 
-public interface DataSource {
+public interface PersonDataSource {
     boolean savePersonName(String personName);
 
     String getPersonName();

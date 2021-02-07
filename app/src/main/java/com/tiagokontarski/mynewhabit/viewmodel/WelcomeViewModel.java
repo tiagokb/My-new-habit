@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.tiagokontarski.mynewhabit.data.DataSource;
+import com.tiagokontarski.mynewhabit.data.PersonDataSource;
 
 public class WelcomeViewModel extends AndroidViewModel {
 
@@ -18,17 +18,17 @@ public class WelcomeViewModel extends AndroidViewModel {
     private final MutableLiveData<Boolean> mDataResponse = new MutableLiveData<>();
     public final LiveData<Boolean> dataResponse = mDataResponse;
 
-    private DataSource dataSource;
+    private PersonDataSource personDataSource;
 
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public void setPersonDataSource(PersonDataSource personDataSource) {
+        this.personDataSource = personDataSource;
     }
 
     public void savePersonName(String personName) {
-        mDataResponse.setValue(dataSource.savePersonName(personName));
+        mDataResponse.setValue(personDataSource.savePersonName(personName));
     }
 
     public boolean verifyUserCreated() {
-        return !dataSource.getPersonName().equals("");
+        return !personDataSource.getPersonName().equals("");
     }
 }

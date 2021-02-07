@@ -1,13 +1,12 @@
 package com.tiagokontarski.mynewhabit.data;
 
 import android.content.Context;
-import android.security.identity.PersonalizationData;
 
-public class LocalDataSource implements DataSource {
+public class PersonPersonDataBase implements PersonDataSource {
 
     private final Context context;
 
-    public LocalDataSource(Context context) {
+    public PersonPersonDataBase(Context context) {
         this.context = context;
     }
 

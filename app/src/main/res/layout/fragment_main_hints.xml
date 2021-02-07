@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/HabitTextView"
+                android:layout_width="match_parent"
+                android:background="#202020"
+                android:padding="16dp"
+                android:text="@string/hints_title"
+                android:textAlignment="center"
+                android:textSize="24sp" />
+
+            <TextView
+                style="@style/HabitTextView"
+                android:layout_width="match_parent"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="6dp"
+                android:padding="8dp"
+                android:text="@string/hints_1"
+                android:textAlignment="textStart" />
+
+            <TextView
+                style="@style/HabitTextView"
+                android:layout_width="match_parent"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="6dp"
+                android:padding="8dp"
+                android:text="@string/hints_2"
+                android:textAlignment="textStart" />
+
+            <TextView
+                style="@style/HabitTextView"
+                android:layout_width="match_parent"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="6dp"
+                android:padding="8dp"
+                android:text="@string/hints_3"
+                android:textAlignment="textStart" />
+
+            <TextView
+                style="@style/HabitTextView"
+                android:layout_width="match_parent"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="6dp"
+                android:padding="8dp"
+                android:text="@string/hints_4"
+                android:textAlignment="textStart" />
+
+            <TextView
+                style="@style/HabitTextView"
+                android:layout_width="match_parent"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="6dp"
+                android:padding="8dp"
+                android:text="@string/hints_5"
+                android:textAlignment="textStart" />
+
+            <TextView
+                style="@style/HabitTextView"
+                android:layout_width="match_parent"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="6dp"
+                android:padding="8dp"
+                android:text="@string/hints_6"
+                android:textAlignment="textStart" />
+
+            <TextView
+                style="@style/HabitTextView"
+                android:layout_width="match_parent"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="6dp"
+                android:padding="8dp"
+                android:text="@string/hints_7"
+                android:textAlignment="textStart" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
