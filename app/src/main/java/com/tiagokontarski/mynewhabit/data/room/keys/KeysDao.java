@@ -19,11 +19,14 @@ public interface KeysDao {
     long insert(NotificationKeysModel model);
 
     //read
-    @Query("select * from keys where id = :id")
-    List<NotificationKeysModel> getKeys(int id);
+    @Query("select `key` from notification_keys where branch = :branch")
+    List<Integer> getKeys(int branch);
 
-    @Query("select * from keys order by createdAt desc limit 1")
+    @Query("select * from notification_keys order by createdAt desc limit 1")
     NotificationKeysModel getLastInserted();
+
+    @Query("select * from notification_keys where branch = :id")
+    List<NotificationKeysModel> getBranch(int id);
 
     //update
     @Update

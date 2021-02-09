@@ -4,31 +4,48 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "keys")
+@Entity(tableName = "notification_keys")
 public class NotificationKeysModel {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    public int uid;
+
+    @ColumnInfo
+    public int branch;
+
+    @ColumnInfo
     public int key;
 
     @ColumnInfo
-    public int id;
+    public int day;
 
     @ColumnInfo
     public long createdAt;
 
-    public void setId(int id) {
-        this.id = id;
+    public NotificationKeysModel(int branch, int key, int day, long createdAt) {
+        this.branch = branch;
+        this.key = key;
+        this.day = day;
+        this.createdAt = createdAt;
     }
 
-    public int getId() {
-        return id;
+    public int getUid() {
+        return uid;
     }
 
-    public int getKey() {
+    public int getBranch() {
+        return branch;
+    }
+
+    public int getKeys() {
         return key;
     }
 
-    public void setCreatedAt(long createdAt) {
-        this.createdAt = createdAt;
+    public int getDay() {
+        return day;
+    }
+
+    public long getCreatedAt() {
+        return createdAt;
     }
 }

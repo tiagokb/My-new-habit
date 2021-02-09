@@ -3,10 +3,12 @@ package com.tiagokontarski.mynewhabit.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,8 +16,10 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tiagokontarski.mynewhabit.R;
+import com.tiagokontarski.mynewhabit.broadcast.NotificationManager;
 import com.tiagokontarski.mynewhabit.commoms.views.AbstractActivity;
 import com.tiagokontarski.mynewhabit.data.DaysDataSource;
+import com.tiagokontarski.mynewhabit.data.KeysDataSource;
 import com.tiagokontarski.mynewhabit.data.PersonDataSource;
 import com.tiagokontarski.mynewhabit.data.PersonPersonDataBase;
 import com.tiagokontarski.mynewhabit.data.RoomDataSource;
@@ -39,7 +43,7 @@ public class MainActivity extends AbstractActivity implements BottomNavigationVi
     private HintsFragment hintsFragment;
     private Fragment actual;
 
-    private PersonDataSource personDataSource = new PersonPersonDataBase(this);
+    private final PersonDataSource personDataSource = new PersonPersonDataBase(this);
 
     public static void launch(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -50,6 +54,11 @@ public class MainActivity extends AbstractActivity implements BottomNavigationVi
     @Override
     public void onInject() {
         personTitle.setText(getString(R.string.main_welcome_person_name, personDataSource.getPersonName()));
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
 
         FragmentViewModel fragmentViewModel =
                 new ViewModelProvider(this,
@@ -58,8 +67,10 @@ public class MainActivity extends AbstractActivity implements BottomNavigationVi
 
         RoomDataSource dataSource = new RoomDataSource(this);
         DaysDataSource daysDataSource = new DaysDataSource(this);
+        KeysDataSource keysDataSource = new KeysDataSource(this);
+        NotificationManager notificationManager = new NotificationManager(this);
 
-        habitFragment = HabitFragment.getFragment(fragmentViewModel, dataSource, daysDataSource);
+        habitFragment = HabitFragment.getFragment(fragmentViewModel, dataSource, daysDataSource, keysDataSource, notificationManager);
         hintsFragment = new HintsFragment();
         actual = habitFragment;
 

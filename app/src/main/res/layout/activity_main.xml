@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2E2E2E"
+    android:background="@color/gray"
     tools:context=".ui.MainActivity">
 
 
@@ -43,15 +43,15 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@id/main_bnv"
         android:src="@drawable/ic_baseline_add_24"
+        app:layout_constraintBottom_toTopOf="@id/main_bnv"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_bnv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#111"
+        android:background="@color/colorPrimaryDark"
         app:itemIconTint="@color/white"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"

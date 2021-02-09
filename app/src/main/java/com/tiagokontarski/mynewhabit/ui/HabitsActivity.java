@@ -82,12 +82,13 @@ public class HabitsActivity extends AbstractActivity implements RadioGroup.OnChe
 
     public static void launch(Context context) {
         Intent intent = new Intent(context, HabitsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 
     public static void launchItem(Context context, int itemId) {
         Intent intent = new Intent(context, HabitsActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(ITEM_ID, itemId);
         context.startActivity(intent);
     }
@@ -125,12 +126,20 @@ public class HabitsActivity extends AbstractActivity implements RadioGroup.OnChe
     }
 
     private void observe() {
+
+        viewModel.finalResponse.observe(this, response -> {
+            if (response) {
+                MainActivity.launch(this);
+            } else {
+                Toast.makeText(this, getString(R.string.creating_item_error), Toast.LENGTH_SHORT).show();
+            }
+        });
+
         viewModel.response.observe(this, response -> {
             if (response) {
                 HabitModel model = viewModel.getNewestModel();
                 NotificationManager manager = new NotificationManager(this);
-                manager.createOrUpdateNotification(model, viewModel.getDaysOfWeek(model.getUid()), new KeysDataSource(this));
-                finish();
+                viewModel.setNotification(this, manager, model, viewModel.getDaysOfWeek(model.getUid()), new KeysDataSource(this), isEditingMode);
             }
         });
 
@@ -247,8 +256,11 @@ public class HabitsActivity extends AbstractActivity implements RadioGroup.OnChe
         } else {
             viewModel.save(description, rgSelection, hour, minute, daysOfWeek);
         }
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        MainActivity.launch(this);
     }
 
     @Override

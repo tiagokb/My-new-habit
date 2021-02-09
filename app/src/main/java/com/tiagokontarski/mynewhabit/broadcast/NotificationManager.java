@@ -4,6 +4,8 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.SystemClock;
 import android.provider.ContactsContract;
 import android.text.BoringLayout;
@@ -24,69 +26,72 @@ import java.util.List;
 public class NotificationManager {
 
     private final Context context;
+    private final AlarmManager alarmManager;
 
     public NotificationManager(Context context) {
         this.context = context;
+        this.alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
     }
 
-    public void createOrUpdateNotification(HabitModel habitModel, DaysModel daysModel, KeysDataSource dataSource) {
-        DaysOfWeek days = new DaysOfWeek();
-        List<Integer> selectedDays = days.getSelectedDays(daysModel);
-
-        for (int day : selectedDays) {
-            createNotification(habitModel.getUid(), habitModel, day, dataSource);
-        }
-    }
-
-    private void dropNotification(int id) {
-
-    }
-
-    private void createNotification(int id, HabitModel model, int weekNumber, KeysDataSource dataSource) {
+    public void dropNotification(List<Integer> keys) {
         Intent notificationIntent = new Intent(context, Broadcast.class);
-        notificationIntent.putExtra(Broadcast.KEY_NOTIFICATION_ID, 1);
-        notificationIntent.putExtra(Broadcast.KEY_NOTIFICATION_MESSAGE, context.getString(R.string.notification_content, model.getDuration()));
-        notificationIntent.putExtra(Broadcast.KEY_NOTIFICATION_TITLE, model.getTitle());
 
-        NotificationKeysModel keysModel = new NotificationKeysModel();
-        keysModel.setId(model.getUid());
-        keysModel.setCreatedAt(System.currentTimeMillis());
+        for (int key : keys) {
 
-        boolean response = dataSource.insert(keysModel) > 0;
+            PendingIntent broadcast = PendingIntent.getBroadcast(context, key,
+                    notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        int _id = dataSource.getLastInserted().getKey();
-
-        PendingIntent broadcast = PendingIntent.getBroadcast(context, _id,
-                notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-
-        Calendar calendar = Calendar.getInstance();
-
-        //days of week
-        calendar.set(Calendar.DAY_OF_WEEK, weekNumber);
-
-        //hour
-        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(model.getHour()));
-
-        //minute
-        calendar.set(Calendar.MINUTE, Integer.parseInt(model.getMinute()));
-
-        //second
-        calendar.set(Calendar.SECOND, 0);
-
-        //millisecon
-        calendar.set(Calendar.MILLISECOND, 0);
-
-        long interval = 7 * 24 * 60 * 60 * 1000;
-
-        Calendar now = Calendar.getInstance();
-        now.set(Calendar.SECOND, 0);
-        now.set(Calendar.MILLISECOND, 0);
-
-        if (calendar.before(now)) {
-            calendar.add(Calendar.DATE, 7);
+            alarmManager.cancel(broadcast);
         }
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), interval, broadcast);
+    }
+
+    public int createNotification(
+            int weekNumber,
+            int hour,
+            int minute,
+            int key,
+            String messageTitle,
+            String message) {
+
+        try {
+            Intent notificationIntent = new Intent(context, Broadcast.class);
+            notificationIntent.putExtra(Broadcast.KEY_NOTIFICATION_ID, 1);
+            notificationIntent.putExtra(Broadcast.KEY_NOTIFICATION_TITLE, messageTitle);
+            notificationIntent.putExtra(Broadcast.KEY_NOTIFICATION_MESSAGE, message);
+
+            PendingIntent broadcast = PendingIntent.getBroadcast(context, key,
+                    notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            Calendar calendar = Calendar.getInstance();
+
+            //days of week
+            calendar.set(Calendar.DAY_OF_WEEK, weekNumber);
+
+            //hour
+            calendar.set(Calendar.HOUR_OF_DAY, hour);
+
+            //minute
+            calendar.set(Calendar.MINUTE, minute);
+
+            //second
+            calendar.set(Calendar.SECOND, 0);
+
+            //millisecon
+            calendar.set(Calendar.MILLISECOND, 0);
+
+            long interval = 7 * 24 * 60 * 60 * 1000;
+
+            Calendar now = Calendar.getInstance();
+            now.set(Calendar.SECOND, 0);
+            now.set(Calendar.MILLISECOND, 0);
+
+            if (calendar.before(now)) {
+                calendar.add(Calendar.DATE, 7);
+            }
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), interval, broadcast);
+            return 1;
+        } catch (Exception e) {
+            return 0;
+        }
     }
 }

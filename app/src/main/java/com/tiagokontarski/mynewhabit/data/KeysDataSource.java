@@ -22,8 +22,8 @@ public class KeysDataSource {
     }
 
     //read
-    public List<NotificationKeysModel> getKeys(int id) {
-        return dataSource.getKeys(id);
+    public List<Integer> getKeys(int branch) {
+        return dataSource.getKeys(branch);
     }
 
     //update
@@ -36,8 +36,11 @@ public class KeysDataSource {
         return dataSource.delete(model);
     }
 
-    public NotificationKeysModel getLastInserted(){
+    public NotificationKeysModel getLastInserted() {
         return dataSource.getLastInserted();
     }
 
+    public List<NotificationKeysModel> getBranch(int id) {
+        return dataSource.getBranch(id);
+    }
 }

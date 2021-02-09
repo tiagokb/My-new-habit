@@ -1,17 +1,20 @@
 package com.tiagokontarski.mynewhabit.ui.fragments;
 
 import android.app.AlertDialog;
+import android.app.Notification;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tiagokontarski.mynewhabit.R;
+import com.tiagokontarski.mynewhabit.broadcast.NotificationManager;
 import com.tiagokontarski.mynewhabit.commoms.listeners.HabitsListeners;
 import com.tiagokontarski.mynewhabit.commoms.recyclerview.HabitAdapter;
 import com.tiagokontarski.mynewhabit.commoms.views.AbstractFragment;
 import com.tiagokontarski.mynewhabit.commoms.model.HabitModel;
 import com.tiagokontarski.mynewhabit.data.DaysDataSource;
+import com.tiagokontarski.mynewhabit.data.KeysDataSource;
 import com.tiagokontarski.mynewhabit.data.RoomDataSource;
 import com.tiagokontarski.mynewhabit.viewmodel.fragments.FragmentViewModel;
 
@@ -22,10 +25,10 @@ public class HabitFragment extends AbstractFragment<FragmentViewModel> implement
     private HabitFragment() {
     }
 
-    public static HabitFragment getFragment(FragmentViewModel viewModel, RoomDataSource dataSource, DaysDataSource daysDataSource) {
+    public static HabitFragment getFragment(FragmentViewModel viewModel, RoomDataSource dataSource, DaysDataSource daysDataSource, KeysDataSource keysDataSource, NotificationManager manager) {
         HabitFragment fragment = new HabitFragment();
         fragment.setViewModel(viewModel);
-        viewModel.setDataSource(dataSource, daysDataSource);
+        viewModel.setDataSource(dataSource, daysDataSource, keysDataSource, manager);
         return fragment;
     }
 
