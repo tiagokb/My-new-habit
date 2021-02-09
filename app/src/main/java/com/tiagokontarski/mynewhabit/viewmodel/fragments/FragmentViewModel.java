@@ -8,18 +8,19 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.tiagokontarski.mynewhabit.commoms.model.DaysModel;
 import com.tiagokontarski.mynewhabit.commoms.model.HabitModel;
-import com.tiagokontarski.mynewhabit.commoms.recyclerview.HabitAdapter;
+import com.tiagokontarski.mynewhabit.data.DaysDataSource;
 import com.tiagokontarski.mynewhabit.data.RoomDataSource;
 import com.tiagokontarski.mynewhabit.ui.HabitsActivity;
-import com.tiagokontarski.mynewhabit.ui.fragments.HabitFragment;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class FragmentViewModel extends AndroidViewModel {
 
-    private RoomDataSource dataSource;
+    private RoomDataSource roomDataSource;
+    private DaysDataSource daysDataSource;
     private final WeakReference<Context> context;
 
     public FragmentViewModel(@NonNull Application application) {
@@ -30,12 +31,13 @@ public class FragmentViewModel extends AndroidViewModel {
     private final MutableLiveData<Boolean> mResponse = new MutableLiveData<>();
     public final LiveData<Boolean> response = mResponse;
 
-    public void setDataSource(RoomDataSource dataSource) {
-        this.dataSource = dataSource;
+    public void setDataSource(RoomDataSource roomDataSource, DaysDataSource daysDataSource) {
+        this.roomDataSource = roomDataSource;
+        this.daysDataSource = daysDataSource;
     }
 
     public List<HabitModel> updateList() {
-        return dataSource.getAll();
+        return roomDataSource.getAll();
     }
 
     public void getItem(int itemId) {
@@ -43,6 +45,8 @@ public class FragmentViewModel extends AndroidViewModel {
     }
 
     public void deleteItem(HabitModel model) {
-        mResponse.postValue(dataSource.delete(model) > 0);
+        DaysModel daysModel = daysDataSource.get(model.getUid());
+        daysDataSource.delete(daysModel);
+        mResponse.postValue(roomDataSource.delete(model) > 0);
     }
 }

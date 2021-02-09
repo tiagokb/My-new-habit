@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -15,8 +17,12 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.tiagokontarski.mynewhabit.R;
-import com.tiagokontarski.mynewhabit.commoms.keys.IntentKeys;
+import com.tiagokontarski.mynewhabit.broadcast.NotificationManager;
+import com.tiagokontarski.mynewhabit.commoms.model.DaysModel;
+import com.tiagokontarski.mynewhabit.commoms.model.HabitModel;
 import com.tiagokontarski.mynewhabit.commoms.views.AbstractActivity;
+import com.tiagokontarski.mynewhabit.data.DaysDataSource;
+import com.tiagokontarski.mynewhabit.data.KeysDataSource;
 import com.tiagokontarski.mynewhabit.data.RoomDataSource;
 import com.tiagokontarski.mynewhabit.viewmodel.HabitsViewModel;
 import com.tiagokontarski.mynewhabit.viewmodel.factory.HabitsViewModelFactory;
@@ -41,6 +47,30 @@ public class HabitsActivity extends AbstractActivity implements RadioGroup.OnChe
 
     @BindView(R.id.habit_btn_save)
     Button btnSave;
+
+    @BindView(R.id.habit_cb_sunday)
+    CheckBox sunday;
+
+    @BindView(R.id.habit_cb_monday)
+    CheckBox monday;
+
+    @BindView(R.id.habit_cb_tuesday)
+    CheckBox tuesday;
+
+    @BindView(R.id.habit_cb_wednesday)
+    CheckBox wednesday;
+
+    @BindView(R.id.habit_cb_thursday)
+    CheckBox thursday;
+
+    @BindView(R.id.habit_cb_friday)
+    CheckBox friday;
+
+    @BindView(R.id.habit_cb_saturday)
+    CheckBox saturday;
+
+    private Boolean etEnabled = false;
+    private Boolean cbEnabled = false;
 
     private HabitsViewModel viewModel;
     private String rgSelection;
@@ -90,13 +120,16 @@ public class HabitsActivity extends AbstractActivity implements RadioGroup.OnChe
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        viewModel.setDataSource(new RoomDataSource(this));
+        viewModel.setDataSource(new RoomDataSource(this), new DaysDataSource(this));
         isFromClickItem();
     }
 
     private void observe() {
-        viewModel.response.observe(this, it -> {
-            if (it) {
+        viewModel.response.observe(this, response -> {
+            if (response) {
+                HabitModel model = viewModel.getNewestModel();
+                NotificationManager manager = new NotificationManager(this);
+                manager.createOrUpdateNotification(model, viewModel.getDaysOfWeek(model.getUid()), new KeysDataSource(this));
                 finish();
             }
         });
@@ -106,46 +139,84 @@ public class HabitsActivity extends AbstractActivity implements RadioGroup.OnChe
                 Toast.makeText(this, getString(R.string.loading_item_error), Toast.LENGTH_SHORT).show();
                 return;
             }
+            DaysModel daysModel = viewModel.getDaysOfWeek(model.getUid());
 
-            etDescription.setText(model.getTitle());
-
-            RadioButton button;
-
-            switch (model.getDuration()) {
-                case "15 min":
-                    button = findViewById(R.id.habit_rb_extra_low);
-                    break;
-                case "30 min":
-                    button = findViewById(R.id.habit_rb_low);
-                    break;
-                case "45 min":
-                    button = findViewById(R.id.habit_rb_regular);
-                    break;
-                case "60 min":
-                    button = findViewById(R.id.habit_rb_high);
-                    break;
-                default:
-                    button = findViewById(R.id.habit_rb_extra_low);
-                    break;
-            }
-
-            rgDuration.check(button.getId());
-            rgSelection = button.getText().toString();
-            tpTime.setCurrentHour(Integer.parseInt(model.getHour()));
-            tpTime.setCurrentMinute(Integer.parseInt(model.getMinute()));
+            populateItens(model, daysModel);
         });
+    }
+
+    private void populateItens(HabitModel habitModel, DaysModel daysModel) {
+        etDescription.setText(habitModel.getTitle());
+        RadioButton button;
+        switch (habitModel.getDuration()) {
+            case "15 min":
+                button = findViewById(R.id.habit_rb_extra_low);
+                break;
+            case "30 min":
+                button = findViewById(R.id.habit_rb_low);
+                break;
+            case "45 min":
+                button = findViewById(R.id.habit_rb_regular);
+                break;
+            case "60 min":
+                button = findViewById(R.id.habit_rb_high);
+                break;
+            default:
+                button = findViewById(R.id.habit_rb_extra_low);
+                break;
+        }
+
+        rgDuration.check(button.getId());
+        rgSelection = button.getText().toString();
+        tpTime.setCurrentHour(Integer.parseInt(habitModel.getHour()));
+        tpTime.setCurrentMinute(Integer.parseInt(habitModel.getMinute()));
+
+        sunday.setChecked(daysModel.getSunday());
+        monday.setChecked(daysModel.getMonday());
+        tuesday.setChecked(daysModel.getTuesday());
+        wednesday.setChecked(daysModel.getWednesday());
+        thursday.setChecked(daysModel.getThursday());
+        friday.setChecked(daysModel.getFriday());
+        saturday.setChecked(daysModel.getSaturnday());
+    }
+
+    public void onCheckBoxClicked(View view) {
+        if (
+                sunday.isChecked() ||
+                        monday.isChecked() ||
+                        tuesday.isChecked() ||
+                        wednesday.isChecked() ||
+                        thursday.isChecked() ||
+                        friday.isChecked() ||
+                        saturday.isChecked()) {
+            cbEnabled = true;
+            setButtonEnabled(etEnabled, cbEnabled);
+        } else {
+            cbEnabled = false;
+            setButtonEnabled(etEnabled, cbEnabled);
+        }
+    }
+
+    void setButtonEnabled(Boolean et, Boolean cb) {
+        if (et && cb) {
+            btnSave.setEnabled(true);
+        } else {
+            btnSave.setEnabled(false);
+        }
     }
 
     @OnTextChanged(R.id.habit_et_description)
     void onTextChanged(CharSequence s) {
         if (etDescription.getText().toString().isEmpty()) {
-            btnSave.setEnabled(false);
             tilDescription.setErrorEnabled(true);
             tilDescription.setError(getString(R.string.habit_et_description));
+            etEnabled = false;
+            setButtonEnabled(etEnabled, cbEnabled);
         } else {
-            btnSave.setEnabled(true);
             tilDescription.setError("");
             tilDescription.setErrorEnabled(false);
+            etEnabled = true;
+            setButtonEnabled(etEnabled, cbEnabled);
         }
     }
 
@@ -161,10 +232,20 @@ public class HabitsActivity extends AbstractActivity implements RadioGroup.OnChe
         String hour = String.valueOf(tpTime.getCurrentHour());
         String minute = String.valueOf(tpTime.getCurrentMinute());
 
+        DaysModel daysOfWeek = new DaysModel(
+                sunday.isChecked(),
+                monday.isChecked(),
+                tuesday.isChecked(),
+                wednesday.isChecked(),
+                thursday.isChecked(),
+                friday.isChecked(),
+                saturday.isChecked());
+
         if (isEditingMode) {
-            viewModel.update(itemId, description, rgSelection, hour, minute);
+            daysOfWeek.setId(itemId);
+            viewModel.update(itemId, description, rgSelection, hour, minute, daysOfWeek);
         } else {
-            viewModel.save(description, rgSelection, hour, minute);
+            viewModel.save(description, rgSelection, hour, minute, daysOfWeek);
         }
 
 

@@ -11,6 +11,7 @@ import com.tiagokontarski.mynewhabit.commoms.listeners.HabitsListeners;
 import com.tiagokontarski.mynewhabit.commoms.recyclerview.HabitAdapter;
 import com.tiagokontarski.mynewhabit.commoms.views.AbstractFragment;
 import com.tiagokontarski.mynewhabit.commoms.model.HabitModel;
+import com.tiagokontarski.mynewhabit.data.DaysDataSource;
 import com.tiagokontarski.mynewhabit.data.RoomDataSource;
 import com.tiagokontarski.mynewhabit.viewmodel.fragments.FragmentViewModel;
 
@@ -21,16 +22,16 @@ public class HabitFragment extends AbstractFragment<FragmentViewModel> implement
     private HabitFragment() {
     }
 
-    public static HabitFragment getFragment(FragmentViewModel viewModel, RoomDataSource dataSource) {
+    public static HabitFragment getFragment(FragmentViewModel viewModel, RoomDataSource dataSource, DaysDataSource daysDataSource) {
         HabitFragment fragment = new HabitFragment();
         fragment.setViewModel(viewModel);
-        viewModel.setDataSource(dataSource);
+        viewModel.setDataSource(dataSource, daysDataSource);
         return fragment;
     }
 
     private void confirmationDialog(HabitModel model) {
         AlertDialog dialog = new AlertDialog.Builder(getContext())
-                .setTitle(getString(R.string.delete_item))
+                .setTitle(getString(R.string.delete_item, model.getTitle()))
                 .setMessage(getString(R.string.delete_message))
                 .setPositiveButton(getString(R.string.delete_item_button), (a, b) -> {
                     viewModel.deleteItem(model);

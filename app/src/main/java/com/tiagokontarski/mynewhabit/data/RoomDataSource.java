@@ -1,15 +1,11 @@
 package com.tiagokontarski.mynewhabit.data;
 
 import android.content.Context;
-import android.widget.Toast;
-
-import androidx.room.RoomDatabase;
 
 import com.tiagokontarski.mynewhabit.commoms.model.HabitModel;
-import com.tiagokontarski.mynewhabit.data.room.Dao;
-import com.tiagokontarski.mynewhabit.data.room.RoomDataBase;
+import com.tiagokontarski.mynewhabit.data.room.main.Dao;
+import com.tiagokontarski.mynewhabit.data.room.main.RoomDataBase;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class RoomDataSource {
@@ -44,4 +40,7 @@ public class RoomDataSource {
         return dataSource.delete(model);
     }
 
+    public HabitModel getNewestModel() {
+        return dataSource.getNewestModel();
+    }
 }

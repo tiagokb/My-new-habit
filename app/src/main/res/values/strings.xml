@@ -1,5 +1,5 @@
 <resources>
-    <string name="main_welcome_person_name">Olá %1$s!</string>
+    <string name="main_welcome_person_name">Olá, %1$s!</string>
     <string name="app_name">My new habit</string>
     <string name="welcome_message"><b>Bem-vindo</b>\nParabéns por tomar a iniciativa de mudar um estilo de vida e tentar evoluir, lembre-se de começar com metas curtas e tangíveis\nVamos nos conhecer um pouco</string>
     <string name="hint_person_name">Como vamos te chamar?</string>
@@ -15,6 +15,9 @@
     <string name="new_habit_duration">Escolha uma duração para o seu novo habito</string>
     <string name="save">salvar</string>
     <string name="habit_et_description">Descreva seu novo habito</string>
+
+    <string name="notification_content">Opa, chegou a hora da mudança. Não esqueça de praticar seu novo habito por %1$s.</string>
+
     <string name="unchecked_cast">Erro ao iniciar tela, tente novamente ou entre em contato com o desenvolvedor</string>
     <string name="loading_item_error">Erro ao carregar habito</string>
     <string name="hints_1">Entender onde estamos, quem somos e o que somos de capazes de fazer e transformar, é o primeiro passo para promover uma mudança de hábito. Outro ponto importante é saber porque essa mudança é importante para você. Isso se, de fato, ela for importante.</string>
@@ -25,8 +28,15 @@
     <string name="hints_6">Estabeleça um prazo justo para esse objetivo, lembrando que cada hábito tem um tempo para ser enraizado, pense em metas reais, alcançáveis. Divida esse mapa em mini hábitos a partir de hoje e cria uma lista de tarefas para alcançar cada um dos pequenos objetivos.</string>
     <string name="hints_7">Alguns hábitos, como vícios, envolvem outros fatores químicos e cognitivos que precisam ser trabalhados e orientados por profissionais da saúde, para evitar problemas de abstinência.</string>
     <string name="hints_title">Aqui vai algumas dicas pra você</string>
-    <string name="delete_item">Excluir item</string>
+    <string name="delete_item">Excluir item: %1$s</string>
     <string name="delete_message">O item será excluido permanentemente, deseja continuar?</string>
     <string name="delete_item_button">Deletar item</string>
     <string name="cancel_delete_item">cancelar</string>
+    <string name="sunday">Dom.</string>
+    <string name="monday">Seg.</string>
+    <string name="tuesday">Ter.</string>
+    <string name="wednesday">Qua.</string>
+    <string name="thursday">Qui.</string>
+    <string name="friday">Sex.</string>
+    <string name="saturday">Sab.</string>
 </resources>

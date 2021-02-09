@@ -1,4 +1,4 @@
-package com.tiagokontarski.mynewhabit.data.room;
+package com.tiagokontarski.mynewhabit.data.room.main;
 
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -23,6 +23,9 @@ public interface Dao {
     @Query("SELECT * FROM habits WHERE uid = :id")
     HabitModel getHabit(int id);
 
+    @Query("SELECT * FROM habits ORDER BY createdAt DESC LIMIT 1")
+    HabitModel getNewestModel();
+
     //Update
     @Update
     int update(HabitModel model);
@@ -30,5 +33,4 @@ public interface Dao {
     //Delete
     @Delete
     int delete(HabitModel model);
-
 }

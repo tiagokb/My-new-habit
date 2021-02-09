@@ -38,7 +38,9 @@
                 android:id="@+id/habit_textview"
                 style="@style/HabitTextView"
                 android:layout_width="match_parent"
+                android:layout_marginStart="14dp"
                 android:layout_marginTop="24dp"
+                android:layout_marginEnd="14dp"
                 android:text="@string/new_habit_duration"
                 android:textAlignment="center"
                 android:textColor="@color/black" />
@@ -46,7 +48,8 @@
             <RadioGroup
                 android:id="@+id/habit_rg_duration"
                 style="@style/HabitRadioGroup"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/habit_textview">
@@ -75,9 +78,104 @@
 
             <TimePicker
                 android:id="@+id/habit_tp_time"
+                style="@style/ContainerForm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/habit_rg_duration" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                style="@style/ContainerForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp">
+
+
+                <CheckBox
+                    android:id="@+id/habit_cb_monday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onCheckBoxClicked"
+                    android:text="@string/monday"
+                    app:layout_constraintBottom_toTopOf="@id/habit_cb_thursday"
+                    app:layout_constraintEnd_toStartOf="@id/habit_cb_tuesday"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <CheckBox
+                    android:id="@+id/habit_cb_tuesday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onCheckBoxClicked"
+                    android:text="@string/tuesday"
+                    app:layout_constraintBottom_toTopOf="@id/habit_cb_friday"
+                    app:layout_constraintEnd_toStartOf="@id/habit_cb_wednesday"
+                    app:layout_constraintStart_toEndOf="@id/habit_cb_monday"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <CheckBox
+                    android:id="@+id/habit_cb_wednesday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onCheckBoxClicked"
+                    android:text="@string/wednesday"
+                    app:layout_constraintBottom_toTopOf="@id/habit_cb_saturday"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/habit_cb_tuesday"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <CheckBox
+                    android:id="@+id/habit_cb_thursday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onCheckBoxClicked"
+                    android:text="@string/thursday"
+                    app:layout_constraintBottom_toTopOf="@id/habit_cb_sunday"
+                    app:layout_constraintEnd_toStartOf="@id/habit_cb_friday"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/habit_cb_monday" />
+
+                <CheckBox
+                    android:id="@+id/habit_cb_friday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onCheckBoxClicked"
+                    android:text="@string/friday"
+                    app:layout_constraintBottom_toTopOf="@id/habit_cb_sunday"
+                    app:layout_constraintEnd_toEndOf="@id/habit_cb_saturday"
+                    app:layout_constraintStart_toEndOf="@id/habit_cb_thursday"
+                    app:layout_constraintTop_toBottomOf="@id/habit_cb_tuesday" />
+
+                <CheckBox
+                    android:id="@+id/habit_cb_saturday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onCheckBoxClicked"
+                    android:text="@string/saturday"
+                    app:layout_constraintBottom_toTopOf="@id/habit_cb_sunday"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/habit_cb_friday"
+                    app:layout_constraintTop_toBottomOf="@id/habit_cb_wednesday" />
+
+                <CheckBox
+                    android:id="@+id/habit_cb_sunday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick="onCheckBoxClicked"
+                    android:text="@string/sunday"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/habit_cb_friday" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
                 android:id="@+id/habit_btn_save"

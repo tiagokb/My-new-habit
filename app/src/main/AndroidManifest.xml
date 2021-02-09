@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.MainActivity" />
+        <receiver android:name=".broadcast.Broadcast"/>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.tiagokontarski.mynewhabit.data.room;
+package com.tiagokontarski.mynewhabit.data.room.main;
 
 import android.content.Context;
 

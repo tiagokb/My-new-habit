@@ -46,7 +46,7 @@ public class HabitViewHolder extends RecyclerView.ViewHolder {
         duration.setText(model.getDuration());
         hourOfDay.setText(timeFormated);
 
-        container.setOnClickListener(l -> listener.onClickItem(model.uid));
+        container.setOnClickListener(l -> listener.onClickItem(model.getUid()));
 
         container.setLongClickable(true);
         container.setOnLongClickListener(l -> {

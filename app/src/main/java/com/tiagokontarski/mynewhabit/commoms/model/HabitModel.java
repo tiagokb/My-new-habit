@@ -2,9 +2,12 @@ package com.tiagokontarski.mynewhabit.commoms.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.List;
 
 @Entity(tableName = "habits")
 public class HabitModel {
@@ -24,19 +27,25 @@ public class HabitModel {
     @ColumnInfo
     String minute;
 
-    public HabitModel(String title, String duration, String hour, String minute) {
+    @ColumnInfo
+    public long createdAt;
+
+    public HabitModel(String title, String duration, String hour, String minute, long createdAt) {
         this.title = title;
         this.duration = duration;
         this.hour = hour;
         this.minute = minute;
+        this.createdAt = createdAt;
     }
 
-    public HabitModel(int id, String title, String duration, String hour, String minute) {
-        this.uid = id;
+    @Ignore
+    public HabitModel(int uid, String title, String duration, String hour, String minute, long createdAt) {
+        this.uid = uid;
         this.title = title;
         this.duration = duration;
         this.hour = hour;
         this.minute = minute;
+        this.createdAt = createdAt;
     }
 
     public String getTitle() {

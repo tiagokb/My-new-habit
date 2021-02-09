@@ -15,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tiagokontarski.mynewhabit.R;
 import com.tiagokontarski.mynewhabit.commoms.views.AbstractActivity;
+import com.tiagokontarski.mynewhabit.data.DaysDataSource;
 import com.tiagokontarski.mynewhabit.data.PersonDataSource;
 import com.tiagokontarski.mynewhabit.data.PersonPersonDataBase;
 import com.tiagokontarski.mynewhabit.data.RoomDataSource;
@@ -56,8 +57,9 @@ public class MainActivity extends AbstractActivity implements BottomNavigationVi
                         .get(FragmentViewModel.class);
 
         RoomDataSource dataSource = new RoomDataSource(this);
+        DaysDataSource daysDataSource = new DaysDataSource(this);
 
-        habitFragment = HabitFragment.getFragment(fragmentViewModel, dataSource);
+        habitFragment = HabitFragment.getFragment(fragmentViewModel, dataSource, daysDataSource);
         hintsFragment = new HintsFragment();
         actual = habitFragment;
 
